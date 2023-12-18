@@ -13,8 +13,8 @@ private:
     
 public:
     void input(){
-        nums = {13,13, 12,12,5,5,5,12,13,13, 11, 9, 8, 7, 5, 5, 4, 3, 2, 1};
-        cout<<"The array is: "<<"{13,13, 12,12,5,5,5,12,13,13, 11, 9, 8, 7, 5, 5, 4, 3, 2, 1}"<<endl;
+        nums = {13,13, 12,12,5,5,5,12,13,13, 11, 9, 8, 7, 5, 5, 4, 3, 2, 1}; // the vector of array can be added via input as well
+        //cout<<"The array is: "<<"{13,13, 12,12,5,5,5,12,13,13, 11, 9, 8, 7, 5, 5, 4, 3, 2, 1}"<<endl;
         cout<<"K: ";
         cin >>k;
     }
