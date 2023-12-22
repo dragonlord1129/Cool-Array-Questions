@@ -38,7 +38,7 @@ void Solution::input() {
     }
 }
 void Solution::add_range() {
-    for (pair<int, int> &range : query_range) {
+    for (pair<int, int> &range : query_range) { //specifically these types of for loops are popular in array of definedd/ undefined size
         int temp = 0;
         for (int j = range.first; j <= range.second; j++) {
             temp += array[j];
