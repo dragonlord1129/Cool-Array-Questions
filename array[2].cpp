@@ -1,108 +1,65 @@
-/*question: Given an array of N numbers and a positive integer K. The problem is to find K numbers with the most occurrences, i.e., the top K numbers having the
-maximum frequency. If two numbers have the same frequency then the number with a larger value should be given preference. The numbers should be displayed in 
-decreasing order of their frequencies. It is assumed that the array consists of at least K numbers.*/
 #include <iostream>
-#include <vector>
+#include<vector>
 using namespace std;
 
-class Solution {
+/* question 2:
+Input:  arr[]   = {1, 1, 2, 1, 3, 4, 5, 2, 8};
+        query[] = [0, 4], [1, 3] [2, 4]
+        Output: Sum of arr[] elements in range [0, 4] is 8
+        Sum of arr[] elements in range [1, 3] is 4
+        Sum of arr[] elements in range [2, 4] is 6
+*/
+class Solution
+{
 private:
-    vector<pair<int, int>> freqPairs;
-    vector <int> nums;
-    int k;
-    
+    vector<int> array;
+    vector<pair<int, int>> query_range;
+    vector<int> result;
+
 public:
-    void input(){
-        nums = {13,13, 12,12,5,5,5,12,13,13, 11, 9, 8, 7, 5, 5, 4, 3, 2, 1}; // the vector of array can be added via input as well
-        //cout<<"The array is: "<<"{13,13, 12,12,5,5,5,12,13,13, 11, 9, 8, 7, 5, 5, 4, 3, 2, 1}"<<endl;
-        cout<<"K: ";
-        cin >>k;
+    Solution()
+    {
+        cout << "your array is: {13,13, 12,12,5,5,5,12,13,13, 11, 9, 8, 7, 5, 5, 4, 3, 2, 1}" << endl; // you can input the array of your choice!!!
+        array = {13, 13, 12, 12, 5, 5, 5, 12, 13, 13, 11, 9, 8, 7, 5, 5, 4, 3, 2, 1};
     }
-    void merge(vector<pair<int, int>>& arr, int low, int mid, int high) {
-        int leftLength = mid - low + 1;
-        int rightLength = high - mid;
-
-        vector<pair<int, int>> left(leftLength);
-        vector<pair<int, int>> right(rightLength);
-
-        for (int i = 0; i < leftLength; ++i) {
-            left[i] = arr[low + i];
-        }
-        for (int j = 0; j < rightLength; ++j) {
-            right[j] = arr[mid + 1 + j];
-        }
-
-        int i = 0, j = 0, k = low;
-        while (i < leftLength && j < rightLength) {
-            if (left[i].second > right[j].second || (left[i].second == right[j].second && left[i].first > right[j].first)) {
-                arr[k] = left[i];
-                ++i;
-            } else {
-                arr[k] = right[j];
-                ++j;
-            }
-            ++k;
-        }
-
-        while (i < leftLength) {
-            arr[k] = left[i];
-            ++i;
-            ++k;
-        }
-
-        while (j < rightLength) {
-            arr[k] = right[j];
-            ++j;
-            ++k;
-        }
+    void input();
+    void add_range();
+    void display();
+};
+void Solution::input() {
+    char ch = 'y';
+    while (ch == 'y' || ch == 'Y') {
+        cout << "Enter the range [start end]: ";
+        int start, end;
+        cin >> start >> end;
+        query_range.emplace_back(start, end);
+        cout << "Add another range (y/n): ";
+        cin >> ch;
     }
-
-    void mergeSort(vector<pair<int, int>>& arr, int low, int high) {
-        if (low < high) {
-            int mid = low + (high - low) / 2;
-            mergeSort(arr, low, mid);
-            mergeSort(arr, mid + 1, high);
-            merge(arr, low, mid, high);
+}
+void Solution::add_range() {
+    for (pair<int, int> &range : query_range) {
+        int temp = 0;
+        for (int j = range.first; j <= range.second; j++) {
+            temp += array[j];
         }
-    }
-
-    void countFrequency(const vector<int>& nums) {
-    for (int num : nums) {
-        int index = -1;
-        for (int i = 0; i < freqPairs.size(); ++i) {
-            if (freqPairs[i].first == num) {
-                index = i;
-                break;
-            }
-        }
-        if (index != -1) {
-            freqPairs[index].second++;
-        } else {
-            freqPairs.push_back({num, 1});
-        }
+        result.push_back(temp);
     }
 }
 
-
-    void topKFrequentNumbers(int K) {
-        mergeSort(freqPairs, 0, freqPairs.size() - 1);
-
-        cout << "Top " << K << " numbers with most occurrences:\n";
-        for (int i = 0; i < K; ++i) {
-            cout << freqPairs[i].first <<" ";
-            // " (Frequency: " << freqPairs[i].second << ")\n";
-        }
+void Solution::display() {
+    int i = 0;
+    for (int &res : result) {
+        cout << "The output of [" << query_range[i].first << ", " << query_range[i].second << "]: " << res << endl;
+        i++;
     }
-    void solution(){
-    input();
-    countFrequency(nums);
-    topKFrequentNumbers(k);
-    }
-};
+}
 
-int main() {
-    Solution s;
-    s.solution();
+int main(){
+    Solution s1;
+    s1.input();
+    s1.add_range();
+    s1.display();
 
     return 0;
 }
