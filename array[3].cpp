@@ -1,4 +1,4 @@
-// queries for the range stuff
+// queries for the array stuff... this ain't much of cool work I just found this question laying of in the internet somewhere!!
 /*
 Input: Q[] = {4, 5} 
 Output: 
@@ -18,41 +18,58 @@ using namespace std;
 
 long factorial(int &n){
     int fact = 1;
-    if (n==0) return fact;
+    if (n<=1) return fact;
     else{
-        while(n!=0){
-            fact *=n;
-            n--;
+        for(int i=2; i<=n; i++){
+            fact *=i;
         }
-        return fact;
+        return fact;        
     }
 }
+
 
 class factorial_array{
     private:
         vector<int> array_main;
-        vector<int> array_required;
+        vector<long> array_required;
+        long  result;
     public:
         void input();
         void calculation_of_factorial();
         void display();
 };
 void factorial_array::input(){
-    array_main =  {9, 8, 7, 5, 5, 4, 3, 2, 1};
+     char ch = 'y';
+     int element;
+        while (ch == 'y' || ch == 'Y') {
+            cout << "Enter the element: ";
+            cin>>element;        
+            array_main.push_back(element);
+            cout << "Add another element (y/n): ";
+            cin >> ch;
+    }
 }
 
 void factorial_array::calculation_of_factorial(){
     for(int num : array_main){
-        array_required.push_back(factorial(num));
+        result =1;
+        for (int i = 1; i <= num; ++i) {
+            result *= factorial(i);
+        }
+        array_required.push_back(result);
     }
 }
+
+
 void factorial_array::display(){
-    for(int i=0; i<array_main.size(); ++i){
-        cout<<array_required[i]<<" "<<endl;
+    for(long nums : array_required){
+        cout<<nums<<" "<<endl;
     }
 }
+
 int main(){
     factorial_array array;
-    array.input();array.calculation_of_factorial();
+    array.input();
+    array.calculation_of_factorial();
     array.display();
 }
