@@ -12,6 +12,7 @@ Output:
 560688561 
 793351288 
 */
+
 #include <iostream>
 #include<vector>
 using namespace std;
