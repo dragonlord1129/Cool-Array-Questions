@@ -27,8 +27,7 @@ void three_number_sum::Solution(){
     sum = 0;
     count = 0;
     for (int a = 0; a < arr.size() - 2; a++){
-        for (int b = a + 1; b < arr.size() - 1; b++)
-        {
+        for (int b = a + 1; b < arr.size() - 1; b++){ //for duplets or two sum        {
             sum = arr[a] + arr[b];
             if (sum == target && arr[a] != arr[b]){
                 i = a;
@@ -36,7 +35,7 @@ void three_number_sum::Solution(){
                 count++;                
                 display();
             }
-            else{
+            else{ //for three sum (sounds wrong I know but gotta do what's necessary)
                 sum = 0;
                 for (int c = b + 1; c < arr.size(); c++){
                     sum = arr[a] + arr[b] + arr[c];
