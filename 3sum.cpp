@@ -1,3 +1,4 @@
+//2 sum and three sum combined; the choice of array and the choice of target values can be given as per wish
 #include <iostream>
 #include <vector>
 using namespace std;
