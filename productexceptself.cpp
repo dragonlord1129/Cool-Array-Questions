@@ -23,22 +23,36 @@ class Solution{
         vector<int> array;
     public:
         Solution(){
-            array = {1,2,3,5,4,6}; // can be anything
+            array = {1,2,3,5,4,6}; // can be anything try another dataset from examples for test as well
         }
         void product();
         void display();
 };
-int product_of_elements(vector<int> &array){
+int product_of_elements(vector<int> &array){ 
     int product =1;
     for(int i : array){
         product = product*i;
     }
     return product;
 }
+int product_of_elements1(vector<int> &array){
+    int product =1;
+    for(int i : array){
+        if(i != 0) product = product*i;
+        else i++;
+    }
+    return product;
+}
 void Solution::product(){
     int product_value = product_of_elements(array);
+    int product_value_without_zero = product_of_elements1(array);
     for(int i =0; i<array.size(); i++){
-        array[i] = product_value/array[i];
+        if (array[i] != 0){
+            array[i] = product_value/array[i];
+        }
+        else {
+            array[i] = product_value_without_zero;
+        }
     }
 }
 void Solution::display(){
